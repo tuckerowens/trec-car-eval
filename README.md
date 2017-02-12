@@ -26,7 +26,7 @@ There are 4 evaluation metrics:
 Create a metrics object using a retrievalToy object (ranking list and truth components).
 \textbf{[metrics object ].metric_methods():}  returns an ArrayList of evaluation metrics "[MAP@k, precision at X, recall at X, precision @R ]". 
 \textbf{[metrics object ].getResults():} print out the results.
-
+\textbf[{metrics object|.getRankOutput():} returns a ranked list with relevance (1/0) for automatic evaluation.
 
 ==== run evaluation toy data set====
 result is:
