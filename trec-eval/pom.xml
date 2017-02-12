@@ -20,7 +20,7 @@
                     <archive>
                         <manifest>
                             <addClasspath>true</addClasspath>
-                            <mainClass>edu.unh.cs.trec.App</mainClass>
+                            <mainClass>edu.unh.cs.trec.evaluation</mainClass>
                         </manifest>
                     </archive>
                 </configuration>
