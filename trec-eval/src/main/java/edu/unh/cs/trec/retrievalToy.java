@@ -31,15 +31,15 @@ public class retrievalToy {
 		while ((line =br.readLine()) != null){
 
 				String[] parsedLine = line.split(" ");
-				String queryId = parsedLine[0];
+				String sectionId = parsedLine[0];
 				String docId = parsedLine[2];
 				documentsRanking.add(docId);
 				int relScore = Integer.valueOf(parsedLine[3]);
 
 				if(relScore>0){
 					groundtruthRelOnly.add(docId);
-					if(groundtruth.containsKey(queryId)){
-						groundtruth.get(queryId).add(docId);
+					if(groundtruth.containsKey(sectionId)){
+						groundtruth.get(sectionId).add(docId);
 					}else{
 						Set<String> trueDocId= new HashSet <String>();
 						trueDocId.add(docId);
