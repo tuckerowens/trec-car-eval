@@ -9,21 +9,12 @@ public class GroundTruth {
 
   private HashMap<String, HashSet<String>> truthSets;
 
-  private FileFilter qrelFilter = new FileFilter() {
-    public boolean accept(File path) {
-      return path.getName().endsWith("hierarchical.qrels");
-    }
-  };
 
-  public GroundTruth( File qrelDir ) {
-
-    if (!qrelDir.isDirectory())
-      throw new IllegalArgumentException("The qrel directory, really needs to be a directory");
-
+  public GroundTruth( File qrelFile ) {
+    
     truthSets = new HashMap<>();
     try {
-      for (File f : qrelDir.listFiles( qrelFilter ))
-        consumeTruth( new BufferedReader( new FileReader( f ) ));
+        consumeTruth( new BufferedReader( new FileReader( qrelFile ) ));
       } catch (Exception e) {
         throw new IllegalArgumentException("The qrel directory, really needs to be a directory");
       }
