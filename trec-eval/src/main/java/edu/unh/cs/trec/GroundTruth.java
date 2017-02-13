@@ -53,7 +53,7 @@ public class GroundTruth {
           continue;
 
         if ( !truthSets.containsKey(query) )
-            truthSets.put( query, new HashSet<>() );
+            truthSets.put( query, new HashSet<String>() );
         assert( !truthSets.get(query).contains(reference) );
         truthSets.get(query).add(reference);
       }
