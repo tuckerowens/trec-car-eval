@@ -1,9 +1,18 @@
 
 # Usage
+
+
+## Requirements
+
+The following must be installed on your machine:
+  1. Maven build tool `mvn`
+  2. Java 7
+
 ## Build
 
 This is a Maven project so moving into the directory 'trec-eval' and runnning 'mvn package' will 
 build a JAR file in the 'trec-eval/target/'.
+
 
 
 ## Run
