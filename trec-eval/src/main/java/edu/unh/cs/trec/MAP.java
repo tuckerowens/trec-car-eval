@@ -5,11 +5,13 @@ public class MAP extends Metric {
 
   private int correct;
   private double sum;
+  private int r;
 
   public MAP(GroundTruth gt ) {
     super(gt);
     correct = 0;
     this.sum = 0;
+    this.r = 0;
   }
 
   /**
@@ -21,12 +23,14 @@ public class MAP extends Metric {
     if (!relevent())
       return 0;
     counter++;
+    if (this.r == 0)
+      this.r = groundTruth.countDocsForQuery(ranking.query);
     if ( groundTruth.relevantToQuery( ranking.query, ranking.passage ) ||
         groundTruth.relevantToQuery(ranking.query, ranking.entity)) {
         correct++;
         sum += ((double) correct) / ((double) counter);
       }
-    return sum / ((double) correct);
+    return sum / ((double) this.r);
   }
 
   //This function should reset all the values in the metric
@@ -35,6 +39,7 @@ public class MAP extends Metric {
     counter = 0;
     correct = 0;
     sum = 0;
+    r = 0;
   }
 
   //This should return if a metric has consumed
@@ -47,11 +52,13 @@ public class MAP extends Metric {
     return "MAP";
   }
 
+  public double noResultsCase() { return 0; }
+
   // This should return the final result
   public double getResult() {
-    if (correct == 0)
+    if (correct == 0 || counter == 0)
       return 0;
-    return sum / ((double) correct);
+    return sum / ((double) r);
   }
 
 }

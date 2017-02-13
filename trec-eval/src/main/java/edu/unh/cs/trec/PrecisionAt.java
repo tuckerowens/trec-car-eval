@@ -35,6 +35,8 @@ public class PrecisionAt extends Metric {
     correct = 0;
   }
 
+  public double noResultsCase() { return 1; }
+
   //This should return if a metric has consumed
   // enough of the ranking to emit a final value
   public boolean relevent() {

@@ -1,12 +1,12 @@
 package edu.unh.cs.trec;
 
 public class Ranking implements Comparable {
-  public String entity;
-  public String passage;
-  public int rank;
-  public double sim;
-  public String runID;
-  public String query;
+  public final String entity;
+  public final String passage;
+  public final int rank;
+  public final double sim;
+  public final String runID;
+  public final String query;
 
   Ranking( String query, String entity, String passage, int rank, double sim, String tag ) {
     this.entity = entity;

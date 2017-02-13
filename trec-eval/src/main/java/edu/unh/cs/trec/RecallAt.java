@@ -51,6 +51,8 @@ public class RecallAt extends Metric {
     return "Recall@" + k;
   }
 
+  public double noResultsCase() { return 0; }
+
   // This should return the final result
   public double getResult() {
     if (counter == 0)

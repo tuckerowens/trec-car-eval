@@ -8,9 +8,10 @@ import java.util.Collections;
 public class SystemResults {
 
   private ArrayList<ArrayList<Ranking>> rankings;
+  private int testedQueries;
 
-  public SystemResults( File runfile ) {
-
+  public SystemResults( File runfile, int testedQueries) {
+    this.testedQueries = testedQueries;
     rankings = new ArrayList<>();
     ArrayList<Ranking> qRank = new ArrayList<>();
     try {
@@ -64,15 +65,19 @@ public class SystemResults {
       for (int i = 0; i < metrics.length; i++) {
         results.get(i).add(metrics[i].getResult());
         sums[i] += metrics[i].getResult();
-        
+
         metrics[i].reset();
       }
     }
+    final int missingQCount = testedQueries - queryCount();
+    for (int i = 0; i < missingQCount; i++ )
+      for (int m = 0; m < metrics.length; m++)
+        results.get(m).add(metrics[m].noResultsCase());
 
 
     double error[] = new double[ sums.length ];
     for ( int i = 0; i < error.length; i++ ) {
-      sums[i] /= queryCount();
+      sums[i] /= testedQueries;
       error[i] = 0;
       for (Double d : results.get(i))
         error[i] += Math.pow( sums[i] - d, 2 );

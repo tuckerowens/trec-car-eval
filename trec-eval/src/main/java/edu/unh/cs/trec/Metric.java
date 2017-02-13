@@ -11,6 +11,8 @@ public abstract class Metric {
     counter = 0;
   }
 
+  public abstract double noResultsCase();
+
   /**
   *
   * This function should increment the counter (assuming you use it)
