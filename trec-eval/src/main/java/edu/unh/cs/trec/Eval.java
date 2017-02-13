@@ -23,7 +23,12 @@ public class Eval {
     rf.evaluateMetrics(new Metric[] {
       new RecallAt(5, gt),
       new PrecisionAt(5, gt),
-      new RPrecision(gt)
+      new PrecisionAt(10, gt),
+      new PrecisionAt(15, gt),
+      new PrecisionAt(20, gt),
+      new PrecisionAt(100, gt),
+      new RPrecision(gt),
+      new MAP(gt)
     });
 
   }

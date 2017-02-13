@@ -64,7 +64,7 @@ public class SystemResults {
       for (int i = 0; i < metrics.length; i++) {
         results.get(i).add(metrics[i].getResult());
         sums[i] += metrics[i].getResult();
-        System.out.println("Metric Local" + metrics[i].getName() + " = " + metrics[i].getResult());
+        
         metrics[i].reset();
       }
     }

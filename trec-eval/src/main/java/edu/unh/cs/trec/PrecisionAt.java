@@ -8,8 +8,6 @@ public class PrecisionAt extends Metric {
 
   public PrecisionAt( int k,  GroundTruth gt ) {
     super(gt);
-    groundTruth = gt;
-    counter = 0;
     this.k = k;
     correct = 0;
   }
