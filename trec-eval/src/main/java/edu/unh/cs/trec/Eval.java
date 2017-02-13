@@ -21,7 +21,6 @@ public class Eval {
 
 
     rf.evaluateMetrics(new Metric[] {
-      new RecallAt(5, gt),
       new PrecisionAt(5, gt),
       new PrecisionAt(10, gt),
       new PrecisionAt(15, gt),

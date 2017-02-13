@@ -47,7 +47,7 @@ public class RPrecision extends Metric {
   }
 
   public String getName() {
-    return "RPrecision";
+    return "R-Precision";
   }
 
   // This should return the final result
