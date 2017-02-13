@@ -1,4 +1,5 @@
-package evaluation;
+// package evaluation;
+package edu.unh.cs.trec;
 
 import java.util.ArrayList;
 import java.util.Set;
