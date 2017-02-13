@@ -31,6 +31,7 @@ public class metrics {
 		double precisionAtX=0.0;
 		double recallAtX=0.0;
 		double precisionAtR=0.0;
+                int counter=1;
 
 
 		int data_patecounter=1;
