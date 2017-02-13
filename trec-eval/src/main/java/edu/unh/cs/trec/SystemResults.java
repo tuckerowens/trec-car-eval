@@ -38,6 +38,56 @@ public class SystemResults {
     }
   }
 
+
+
+  public void evaluateMetrics( Metric[] metrics ) {
+    ArrayList<ArrayList<Double>> results = new ArrayList<>();
+    double sums[] = new double[metrics.length];
+    for (int i = 0; i < metrics.length; i++) {
+      results.add( new ArrayList() );
+      sums[i] = 0.0;
+    }
+
+    boolean metricsReady = false;
+    //Starting to think the word Ranking is overused
+    for (ArrayList<Ranking> ranking : rankings) {
+      for (Ranking r : ranking) {
+        metricsReady = true;
+        for (int i = 0; i < metrics.length; i++) {
+          metrics[i].apply( r );
+          if(metricsReady && metrics[i].relevent())
+            metricsReady = false;
+        }
+        if (metricsReady)
+          break;
+      }
+      for (int i = 0; i < metrics.length; i++) {
+        results.get(i).add(metrics[i].getResult());
+        sums[i] += metrics[i].getResult();
+        System.out.println("Metric Local" + metrics[i].getName() + " = " + metrics[i].getResult());
+        metrics[i].reset();
+      }
+    }
+
+
+    double error[] = new double[ sums.length ];
+    for ( int i = 0; i < error.length; i++ ) {
+      sums[i] /= queryCount();
+      error[i] = 0;
+      for (Double d : results.get(i))
+        error[i] += Math.pow( sums[i] - d, 2 );
+      error[i] = Math.sqrt( error[i] / results.get(i).size());
+      System.out.println("Metric " + metrics[i].getName() + " = " + sums[i] + "\t err: " + error[i]);
+    }
+
+
+
+  }
+
+
+
+
+
   public int queryCount() { return rankings.size(); }
 
 
@@ -53,34 +103,7 @@ public class SystemResults {
     );
   }
 
-  public class Ranking implements Comparable {
-    public String entity;
-    public String passage;
-    public int rank;
-    public double sim;
-    public String runID;
-    public String query;
 
-    Ranking( String query, String entity, String passage, int rank, double sim, String tag ) {
-      this.entity = entity;
-      this.passage = passage;
-      this.rank = rank;
-      this.sim = sim;
-      this.runID = tag;
-      this.query = query;
-    }
-
-    public int compareTo(Ranking r) {
-      return rank - r.rank;
-    }
-
-    public int compareTo(Object o) {
-      if ( o instanceof Ranking )
-        return rank - ((Ranking)o).rank;
-      return 0; //why not...
-    }
-
-  }
 
 
 }

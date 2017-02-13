@@ -20,6 +20,12 @@ public class Eval {
     SystemResults rf = new SystemResults(runfile);
 
 
+    rf.evaluateMetrics(new Metric[] {
+      new RecallAt(5, gt),
+      new PrecisionAt(5, gt),
+      new RPrecision(gt)
+    });
+
   }
 
 

@@ -6,7 +6,7 @@ public abstract class Metric {
 
   GroundTruth groundTruth;
   int counter;
-  public Metric( GroundTruth gt ) {
+  Metric( GroundTruth gt ) {
     groundTruth = gt;
     counter = 0;
   }
@@ -16,10 +16,20 @@ public abstract class Metric {
   * This function should increment the counter (assuming you use it)
   * and return a number for the current value of the metric
   */
-  public double apply(Ranking ranking);
+  public abstract double apply(Ranking ranking);
 
   //This function should reset all the values in the metric
   //so we can reuse them.
-  public void reset();
+  public abstract void reset();
+
+  //This should return if a metric has consumed
+  // enough of the ranking to emit a final value
+  public abstract boolean relevent();
+
+  // This should return the final result
+  public abstract  double getResult();
+
+  public abstract String getName();
+
 
 }

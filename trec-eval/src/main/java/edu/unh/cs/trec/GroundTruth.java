@@ -11,7 +11,7 @@ public class GroundTruth {
 
   private FileFilter qrelFilter = new FileFilter() {
     public boolean accept(File path) {
-      return path.getName().endsWith(".qrels");
+      return path.getName().endsWith("hierarchical.qrels");
     }
   };
 
@@ -30,6 +30,14 @@ public class GroundTruth {
   }
 
   public int queryCount() { return truthSets.size(); }
+
+  public int countDocsForQuery(String query) {
+    if (truthSets.containsKey(query))
+      return truthSets.get(query).size();
+    return 0; // We could smooth here.
+  }
+
+
 
   private void consumeTruth( BufferedReader qrelReader ) {
     String input;
