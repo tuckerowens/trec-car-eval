@@ -1,5 +1,4 @@
-// package evaluation;
-package edu.unh.cs.trec;
+package evaluation;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -21,16 +20,14 @@ public class retrievalToy {
 	 static Set<String> truth_rel;
 	 static ArrayList<String> ranklist;
 //	@SuppressWarnings("static-access")
-	// public retrievalToy(String data_path, String data_set) throws NumberFormatException, IOException{
-	// public retrievalToy(String data_path, String data_set) throws NumberFormatException, IOException{
-	public retrievalToy(String filename) throws NumberFormatException, IOException{
+	public retrievalToy(String data_path, String data_set) throws NumberFormatException, IOException{
 		this.data_path=data_path;
 		this.data_set=data_set;	
 
-		ArrayList<String> documentsRanking = new ArrayList<String>();
+		ArrayList<String> documentsRanking = new ArrayList<String>();	
 		Map<String, Set<String> >groundtruth = new HashMap<String, Set<String>>();
 		Set<String> groundtruthRelOnly = new HashSet();
-		// String filename = data_path+data_set;
+		String filename = data_path+data_set;
 		String line;
 		InputStream is = new FileInputStream(new File(filename));
 		BufferedReader br = new BufferedReader(new InputStreamReader(is));
@@ -40,7 +37,7 @@ public class retrievalToy {
 				String[] parsedLine = line.split(" ");
 				String sectionId = parsedLine[0];
 				String docId = parsedLine[2];
-				documentsRanking.add(docId);
+				documentsRanking.add(sectionId + " "+docId);
 				int relScore = Integer.valueOf(parsedLine[3]);
 				
 				if(relScore>0){
