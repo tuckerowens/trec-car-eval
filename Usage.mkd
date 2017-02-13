@@ -1,0 +1,37 @@
+
+# Usage
+## Build
+
+This is a Maven project so moving into the directory 'trec-eval' and runnning 'mvn package' will 
+build a JAR file in the 'trec-eval/target/'.
+
+
+## Run
+
+The JAR should be run like any other. From 'trec-eval/': `java -jar target/trec-eval...jar xyz.runfile rqeldata/`
+
+The JAR file takes two arguments:
+  1. The runfile, containing rankings to be evaluated
+  2. The directory containing relevant qrel files
+  
+  
+## Modify
+The main class of this project is located in `trec-eval/src/main/java/edu/unh/cs/trec/Eval.java`. 
+It builds an array of metrics to be evaluated and passes them into the system. If you would like different metrics please 
+feel free to change that line.
+
+Example { Precision@5, Precision@10, MAP }
+```java
+  rf.evaluateMetrics(new Metric[] {
+      new PrecisionAt(5, gt),
+      new PrecisionAt(10, gt),
+      new MAP(gt)
+    });
+```
+
+
+## Extend
+In this evaluation system, a `Metric` is an abstract class which is then extended. This means that it's not too complicated to 
+implement your own custom metric and use it:
+  1. Create a new class which extends Metric
+  2. Use the new class as it was shown in the above section
