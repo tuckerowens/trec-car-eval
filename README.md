@@ -7,3 +7,8 @@ previous version of code (for confirmation) is stored at: https://github.com/gum
 2. The code is written in Java as a Maven project. The user required to compile the project the command:
 $ mvn package and run with
 $ java −jar ./ target/∗−SNAPSHOT. jar <runfile > <qrel dir>
+
+
+# Contributers
+Bryan Zhang, Tucker Owens, Bahram Behzadian
+
