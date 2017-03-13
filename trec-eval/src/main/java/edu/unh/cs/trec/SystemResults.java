@@ -52,7 +52,12 @@ public class SystemResults {
     boolean metricsReady = false;
     //Starting to think the word Ranking is overused
     for (ArrayList<Ranking> ranking : rankings) {
+      Ranking lastR = null;
       for (Ranking r : ranking) {
+        if ( lastR == null )
+          lastR = r;
+        else if ( lastR.passage.equals(r.passage) )
+          continue;
         metricsReady = true;
         for (int i = 0; i < metrics.length; i++) {
           metrics[i].apply( r );

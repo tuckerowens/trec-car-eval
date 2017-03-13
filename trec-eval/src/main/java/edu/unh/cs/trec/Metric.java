@@ -6,6 +6,9 @@ public abstract class Metric {
 
   GroundTruth groundTruth;
   int counter;
+
+
+
   Metric( GroundTruth gt ) {
     groundTruth = gt;
     counter = 0;

@@ -27,7 +27,8 @@ public class Eval {
       new PrecisionAt(20, gt),
       new PrecisionAt(100, gt),
       new RPrecision(gt),
-      new MAP(gt)
+      new MAP(gt),
+      new MeanReciprocalRank(gt)
     });
 
   }
