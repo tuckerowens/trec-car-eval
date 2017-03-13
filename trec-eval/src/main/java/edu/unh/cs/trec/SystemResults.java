@@ -1,6 +1,7 @@
 package edu.unh.cs.trec;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.io.*;
 import java.util.Collections;
 
@@ -8,10 +9,8 @@ import java.util.Collections;
 public class SystemResults {
 
   private ArrayList<ArrayList<Ranking>> rankings;
-  private int testedQueries;
 
-  public SystemResults( File runfile, int testedQueries) {
-    this.testedQueries = testedQueries;
+  public SystemResults( File runfile) {
     rankings = new ArrayList<>();
     ArrayList<Ranking> qRank = new ArrayList<>();
     try {
@@ -49,15 +48,19 @@ public class SystemResults {
       sums[i] = 0.0;
     }
 
+
+    int testedQueries = 0;
+
     boolean metricsReady = false;
     //Starting to think the word Ranking is overused
     for (ArrayList<Ranking> ranking : rankings) {
-      Ranking lastR = null;
+      HashSet<String> processed = new HashSet<>();
+
       for (Ranking r : ranking) {
-        if ( lastR == null )
-          lastR = r;
-        else if ( lastR.passage.equals(r.passage) )
+        if ( processed.contains( r.passage ) )
           continue;
+        else
+          processed.add(r.passage);
         metricsReady = true;
         for (int i = 0; i < metrics.length; i++) {
           metrics[i].apply( r );
@@ -69,15 +72,19 @@ public class SystemResults {
       }
       for (int i = 0; i < metrics.length; i++) {
         results.get(i).add(metrics[i].getResult());
+        //System.err.println("Metric " + metrics[i].getName() + "  " + metrics[i].getResult());
         sums[i] += metrics[i].getResult();
 
         metrics[i].reset();
       }
+      testedQueries++;
     }
     final int missingQCount = testedQueries - queryCount();
-    for (int i = 0; i < missingQCount; i++ )
+    for (int i = 0; i < missingQCount; i++ ) {
       for (int m = 0; m < metrics.length; m++)
         results.get(m).add(metrics[m].noResultsCase());
+      testedQueries++;
+    }
 
 
     double error[] = new double[ sums.length ];

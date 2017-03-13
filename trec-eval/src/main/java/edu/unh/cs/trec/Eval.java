@@ -17,7 +17,7 @@ public class Eval {
     File qrels = new File( args[1] );
 
     GroundTruth gt = new GroundTruth(qrels);
-    SystemResults rf = new SystemResults(runfile, gt.queryCount());
+    SystemResults rf = new SystemResults(runfile);
 
 
     rf.evaluateMetrics(new Metric[] {

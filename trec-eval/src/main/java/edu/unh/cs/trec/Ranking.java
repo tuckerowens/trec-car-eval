@@ -27,4 +27,10 @@ public class Ranking implements Comparable {
     return 0; //why not...
   }
 
+  public String toString() {
+
+    return query + " " + passage + " " + rank;
+
+  }
+
 }

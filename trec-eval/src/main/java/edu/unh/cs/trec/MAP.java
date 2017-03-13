@@ -30,6 +30,10 @@ public class MAP extends Metric {
         correct++;
         sum += ((double) correct) / ((double) counter);
       }
+
+    if (sum > this.r)
+      System.err.println("AHHHHHHHHHHHHHh: " + ranking.toString());
+
     return sum / ((double) this.r);
   }
 
